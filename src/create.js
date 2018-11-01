@@ -15,7 +15,16 @@ const Create = (options, emit, toggle) => {
 
     // Create the dropdown panel
     const panel = document.createElement('div');
-    panel.classList.add(options.classnames.panel);
+    if(options.panel_type == "emoji")
+    {
+        panel.classList.add(options.classnames.panel);
+        panel.classList.add(options.classnames.emojipick); 
+    }
+    else if(options.panel_type == "icon"){
+        panel.classList.add(options.classnames.panel); 
+        panel.classList.add(options.classnames.iconpick); 
+    }
+    
     const content = document.createElement('div');
     content.classList.add(options.classnames.content);
     panel.appendChild(content);

@@ -19,130 +19,196 @@ const Emojis = {
                 svgXhr.send();
             });
         }
-
+       
+        let jsonPromise;
         // Load the emojis json
-        const json = localStorage.getItem('EmojiPanel-json');
-        let jsonPromise = Promise.resolve(json);
-        if(json == null) {
-            jsonPromise = new Promise(resolve => {
-                const emojiXhr = new XMLHttpRequest();
-                emojiXhr.open('GET', options.json_url, true);
-                emojiXhr.onreadystatechange = () => {
-                    if(emojiXhr.readyState == XMLHttpRequest.DONE && emojiXhr.status == 200) {
-                        const json = JSON.parse(emojiXhr.responseText);
-                        resolve(json);
-                    }
-                };
-                emojiXhr.send();
-            });
+        if(options.panel_type == "emoji")
+        {
+            const json = localStorage.getItem('EmojiPanel-json');
+            jsonPromise = Promise.resolve(json)
+            if(json == null) {
+                jsonPromise = new Promise(resolve => {
+                    const emojiXhr = new XMLHttpRequest();
+                    emojiXhr.open('GET', options.json_url, true);
+                    emojiXhr.onreadystatechange = () => {
+                        if(emojiXhr.readyState == XMLHttpRequest.DONE && emojiXhr.status == 200) {
+                            const json = JSON.parse(emojiXhr.responseText);
+                            localStorage.setItem('EmojiPanel-json',emojiXhr.responseText);
+                            resolve(json);
+                        }
+                    };
+                    emojiXhr.send();
+                });
+            }
+            else{
+                jsonPromise = new Promise(resolve => {
+                    const json = JSON.parse(localStorage.getItem('EmojiPanel-json'));
+                    resolve(json);
+                })
+            }
+        }
+        else if(options.panel_type == "icon"){
+            const json = localStorage.getItem('IconPanel-json');
+            jsonPromise = Promise.resolve(json)
+            if(json == null) {
+                jsonPromise = new Promise(resolve => {
+                    const emojiXhr = new XMLHttpRequest();
+                    emojiXhr.open('GET', options.json_url, true);
+                    emojiXhr.onreadystatechange = () => {
+                        if(emojiXhr.readyState == XMLHttpRequest.DONE && emojiXhr.status == 200) {
+                            const json = JSON.parse(emojiXhr.responseText);
+                            localStorage.setItem('IconPanel-json',emojiXhr.responseText);
+                            resolve(json);
+                        }
+                    };
+                    emojiXhr.send();
+                });
+            }
+            else{
+                jsonPromise = new Promise(resolve => {
+                    const json = JSON.parse(localStorage.getItem('IconPanel-json'));
+                    resolve(json);
+                })
+            }
         }
 
         return Promise.all([ svgPromise, jsonPromise ]);
     },
-    createEl: (emoji, options) => {
-        if(options.pack_url) {
-            if(document.querySelector(`.${options.classnames.svg} [id="${emoji.unicode}"`)) {
-                return `<svg viewBox="0 0 20 20"><use xlink:href="#${emoji.unicode}"></use></svg>`;
+    createEl: (inputElement, options) => {
+        if(options.panel_type == "emoji"){
+
+            if(options.pack_url) {
+                if(document.querySelector(`.${options.classnames.svg} [id="${inputElement.unicode}"`)) {
+                    return `<svg viewBox="0 0 20 20"><use xlink:href="#${inputElement.unicode}"></use></svg>`;
+                }
             }
+            return inputElement.char;
+            // Fallback to the emoji char if the pack does not have the sprite, or no pack
         }
-
-        // Fallback to the emoji char if the pack does not have the sprite, or no pack
-        return emoji.char;
+        else if(options.panel_type == "icon")
+        {
+            return "<img src="+inputElement.icon_url+">";
+        }
     },
-    createButton: (emoji, options, emit) => {
-        if(emoji.fitzpatrick && options.fitzpatrick) {
-            // Remove existing modifiers
-            Object.keys(modifiers).forEach(i => emoji.unicode = emoji.unicode.replace(modifiers[i].unicode, ''));
-            Object.keys(modifiers).forEach(i => emoji.char = emoji.char.replace(modifiers[i].char, ''));
-
-            // Append fitzpatrick modifier
-            emoji.unicode += modifiers[options.fitzpatrick].unicode;
-            emoji.char += modifiers[options.fitzpatrick].char;
-        }
+    createButton: (inputElement, options, emit) => {
 
         const button = document.createElement('button');
         button.setAttribute('type', 'button');
-        button.innerHTML = Emojis.createEl(emoji, options);
-        button.classList.add('emoji');
-        button.dataset.unicode = emoji.unicode;
-        button.dataset.char = emoji.char;
-        button.dataset.category = emoji.category;
-        button.dataset.name = emoji.name;
-        if(emoji.fitzpatrick) {
-            button.dataset.fitzpatrick = emoji.fitzpatrick;
+
+        if(options.panel_type == "emoji"){
+
+            if(inputElement.fitzpatrick && options.fitzpatrick) {
+                // Remove existing modifiers
+                Object.keys(modifiers).forEach(i => inputElement.unicode = inputElement.unicode.replace(modifiers[i].unicode, ''));
+                Object.keys(modifiers).forEach(i => inputElement.char = inputElement.char.replace(modifiers[i].char, ''));
+
+                // Append fitzpatrick modifier
+                inputElement.unicode += modifiers[options.fitzpatrick].unicode;
+                inputElement.char += modifiers[options.fitzpatrick].char;
+            }
+
+            button.innerHTML = Emojis.createEl(inputElement, options);
+            button.classList.add('emoji');
+            button.dataset.unicode = inputElement.unicode;
+            button.dataset.char = inputElement.char;
+            button.dataset.category = inputElement.category;
+            button.dataset.name = inputElement.name;
+            button.title = inputElement.name;
+            if(inputElement.fitzpatrick) {
+                button.dataset.fitzpatrick = inputElement.fitzpatrick;
+            }
+            if(emit) {
+                button.addEventListener('click', () => {
+                    emit('select', inputElement);
+
+                    if(options.editable) {
+                        Emojis.write(inputElement, options);
+                    }
+                });
+            }
         }
+        else if(options.panel_type == "icon"){
+            
+            button.innerHTML = Emojis.createEl(inputElement, options);
+            button.classList.add('icon_pack');
+            button.dataset.name = inputElement.name;
 
-        if(emit) {
-            button.addEventListener('click', () => {
-                emit('select', emoji);
+            if(emit) {
+                button.addEventListener('click', () => {
+                    emit('select', inputElement);
 
-                if(options.editable) {
-                    Emojis.write(emoji, options);
-                }
-            });
+                    if(options.editable) {
+                        Emojis.write(inputElement, options);
+                    }
+                });
+            }
         }
-
         return button;
     },
-    write: (emoji, options) => {
+    write: (inputElement, options) => {
         const input = options.editable;
         if(!input) {
             return;
         }
+        if(options.panel_type == "emoji"){
 
-        // Insert the emoji at the end of the text by default
-        let offset = input.textContent.length;
-        if(input.dataset.offset) {
-            // Insert the emoji where the rich editor caret was
-            offset = input.dataset.offset;
+            // Insert the emoji at the end of the text by default
+            let offset = input.textContent.length;
+            if(input.dataset.offset) {
+                // Insert the emoji where the rich editor caret was
+                offset = input.dataset.offset;
+            }
+
+            // Insert the pictographImage
+            const pictographs = input.parentNode.querySelector('.EmojiPanel__pictographs');
+            const url = 'https://abs.twimg.com/emoji/v2/72x72/' + emoji.unicode + '.png';
+            const image = document.createElement('img');
+            image.classList.add('RichEditor-pictographImage');
+            image.setAttribute('src', url);
+            image.setAttribute('draggable', false);
+            pictographs.appendChild(image);
+
+            const span = document.createElement('span');
+            span.classList.add('EmojiPanel__pictographText');
+            span.setAttribute('title', emoji.name);
+            span.setAttribute('aria-label', emoji.name);
+            span.dataset.pictographText = emoji.char;
+            span.dataset.pictographImage = url;
+            span.innerHTML = '&emsp;';
+
+            // If it's empty, remove the default content of the input
+            const div = input.querySelector('div');
+            if(div.innerHTML == '<br>') {
+                div.innerHTML = '';
+            }
+
+            // Replace each pictograph span with it's native character
+            const picts = div.querySelectorAll('.EmojiPanel__pictographText');
+            [].forEach.call(picts, pict => {
+                div.replaceChild(document.createTextNode(pict.dataset.pictographText), pict);
+            });
+
+            // Split content into array, insert emoji at offset index
+            let content = emojiAware.split(div.textContent);
+            content.splice(offset, 0, emoji.char);
+            content = content.join('');
+            
+            div.textContent = content;
+
+            // Trigger a refresh of the input
+            const event = document.createEvent('HTMLEvents');
+            event.initEvent('mousedown', false, true);
+            input.dispatchEvent(event);
+
+            // Update the offset to after the inserted emoji
+            input.dataset.offset = parseInt(input.dataset.offset, 10) + 1;
+
+            if(options.frequent == true) {
+                Frequent.add(emoji, Emojis.createButton);
+            }
         }
+        else if(options.panel_type == "icon"){
 
-        // Insert the pictographImage
-        const pictographs = input.parentNode.querySelector('.EmojiPanel__pictographs');
-        const url = 'https://abs.twimg.com/emoji/v2/72x72/' + emoji.unicode + '.png';
-        const image = document.createElement('img');
-        image.classList.add('RichEditor-pictographImage');
-        image.setAttribute('src', url);
-        image.setAttribute('draggable', false);
-        pictographs.appendChild(image);
-
-        const span = document.createElement('span');
-        span.classList.add('EmojiPanel__pictographText');
-        span.setAttribute('title', emoji.name);
-        span.setAttribute('aria-label', emoji.name);
-        span.dataset.pictographText = emoji.char;
-        span.dataset.pictographImage = url;
-        span.innerHTML = '&emsp;';
-
-        // If it's empty, remove the default content of the input
-        const div = input.querySelector('div');
-        if(div.innerHTML == '<br>') {
-            div.innerHTML = '';
-        }
-
-        // Replace each pictograph span with it's native character
-        const picts = div.querySelectorAll('.EmojiPanel__pictographText');
-        [].forEach.call(picts, pict => {
-            div.replaceChild(document.createTextNode(pict.dataset.pictographText), pict);
-        });
-
-        // Split content into array, insert emoji at offset index
-        let content = emojiAware.split(div.textContent);
-        content.splice(offset, 0, emoji.char);
-        content = content.join('');
-        
-        div.textContent = content;
-
-        // Trigger a refresh of the input
-        const event = document.createEvent('HTMLEvents');
-        event.initEvent('mousedown', false, true);
-        input.dispatchEvent(event);
-
-        // Update the offset to after the inserted emoji
-        input.dataset.offset = parseInt(input.dataset.offset, 10) + 1;
-
-        if(options.frequent == true) {
-            Frequent.add(emoji, Emojis.createButton);
         }
     }
 };

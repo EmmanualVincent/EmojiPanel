@@ -50,6 +50,28 @@
             border-color: #F1F1F1;
         }
     }
+    .icon_pack , .header_icons{
+        width: $EmojiPanel-icon-width;
+        height: $EmojiPanel-icon-width;
+        border: 5px solid transparent;
+        border-radius: $EmojiPanel-border-radius;
+        font-size: ($EmojiPanel-emoji-width - 10px);
+        line-height: 1.1;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &:hover, &:focus {
+            background: #F1F1F1;
+            border-color: #F1F1F1;
+        }
+        img{
+            height: 100%;
+        }
+    }
+    .header_icons{
+        width: 40px;
+        height: 40px
+    }
     .temp {
         flex: initial;
         width: 20px;

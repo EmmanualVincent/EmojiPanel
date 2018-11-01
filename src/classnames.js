@@ -5,6 +5,9 @@ module.exports = {
     open: panel + '--open',
     trigger: panel + '--trigger',
     
+    icons: "icon_pack",
+    iconpick: "icon_picker",
+    emojipick: "emoji_picker",
     emoji: 'emoji',
     svg: panel + '__svg',
 

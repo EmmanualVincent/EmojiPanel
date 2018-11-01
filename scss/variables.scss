@@ -12,3 +12,5 @@ $EmojiPanel-border-radius: 3px !default;
 // Dimensions
 $EmojiPanel-emoji-width: 30px !default;
 $EmojiPanel-width: $EmojiPanel-emoji-width * 9 + ($EmojiPanel-padding-results * 2);
+$EmojiPanel-icon-width : 50px !default;
+$EmojiPanel-icon-pack-width : $EmojiPanel-icon-width + ($EmojiPanel-padding-results * 2)
