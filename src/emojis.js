@@ -71,6 +71,20 @@ const Emojis = {
             //     })
             // }
         }
+        else if(options.panel_type == "giph"){
+
+            jsonPromise = new Promise(resolve => {
+                const emojiXhr = new XMLHttpRequest();
+                emojiXhr.open('GET', "http://api.giphy.com/v1/gifs/search?q=funny+cat&api_key=7yc1te83tzamTb7B9tbTGGf0PQENT0mw&limit=5", true);
+                emojiXhr.onreadystatechange = () => {
+                    if(emojiXhr.readyState == XMLHttpRequest.DONE && emojiXhr.status == 200) {
+                        const json = JSON.parse(emojiXhr.responseText);
+                        resolve(json.data);
+                    }
+                };
+                emojiXhr.send();
+            });
+        }
 
         return Promise.all([ svgPromise, jsonPromise ]);
     },

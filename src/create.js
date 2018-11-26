@@ -18,13 +18,13 @@ const Create = (options, emit, toggle) => {
     if(options.panel_type == "emoji")
     {
         panel.classList.add(options.classnames.panel);
-        panel.classList.add(options.classnames.emojipick); 
+        panel.classList.add(options.classnames.emojipick);
     }
     else if(options.panel_type == "icon"){
-        panel.classList.add(options.classnames.panel); 
-        panel.classList.add(options.classnames.iconpick); 
+        panel.classList.add(options.classnames.panel);
+        panel.classList.add(options.classnames.iconpick);
     }
-    
+
     const content = document.createElement('div');
     content.classList.add(options.classnames.content);
     panel.appendChild(content);
@@ -61,7 +61,7 @@ const Create = (options, emit, toggle) => {
         categoryLink.classList.add('temp');
         categories.appendChild(categoryLink);
     }
-    
+
     // Create the list
     results = document.createElement('div');
     results.classList.add(options.classnames.results);
@@ -202,7 +202,7 @@ const getCaretPosition = el => {
         preCaretTextRange.setEndPoint('EndToEnd', textRange);
         caretOffset = preCaretTextRange.text.length;
     }
-    
+
     return caretOffset;
 };
 

@@ -13,8 +13,10 @@ const defaults = {
     pack_url: null,
     // panel_type: 'emoji',
     // json_url: '/emojis.json',
-    panel_type: 'icon',
-    json_url: '/iconSet.json',
+    // panel_type: 'icon',
+    // json_url: '/iconSet.json',
+    panel_type: 'giph',
+    // json_url: '/iconSet.json',
     tether: true,
     placement: 'bottom',
 
