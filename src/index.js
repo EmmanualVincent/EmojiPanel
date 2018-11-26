@@ -11,6 +11,8 @@ const defaults = {
     fitzpatrick: 'a',
     hidden_categories: [],
     pack_url: null,
+    // panel_type: 'emoji',
+    // json_url: '/emojis.json',
     panel_type: 'icon',
     json_url: '/iconSet.json',
     tether: true,
@@ -57,7 +59,7 @@ export default class EmojiPanel extends EventEmitter {
     toggle() {
         const open = this.panel.classList.toggle(this.options.classnames.open);
         const searchInput = this.panel.querySelector('.' + this.options.classnames.searchInput);
-            
+
         this.emit('toggle', open);
         if(open && this.options.search && searchInput) {
             searchInput.focus();

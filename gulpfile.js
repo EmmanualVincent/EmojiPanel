@@ -25,7 +25,7 @@ gulp.task('js', () => {
             .once('error', function(err) { console.error(err); this.emit('end'); })
             .pipe(source('emojipanel.js'))
             .pipe(buffer())
-            // .pipe(!dev ? uglify() : util.noop())
+            .pipe(!dev ? uglify() : util.noop())
             .pipe(gulp.dest('./dist'))
             .pipe(gulp.dest('./docs/js'))
             .once('end', () => {

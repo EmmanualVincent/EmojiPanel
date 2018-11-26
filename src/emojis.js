@@ -19,7 +19,7 @@ const Emojis = {
                 svgXhr.send();
             });
         }
-       
+
         let jsonPromise;
         // Load the emojis json
         if(options.panel_type == "emoji")
@@ -48,33 +48,33 @@ const Emojis = {
             }
         }
         else if(options.panel_type == "icon"){
-            const json = localStorage.getItem('IconPanel-json');
-            jsonPromise = Promise.resolve(json)
-            if(json == null) {
+            // const json = localStorage.getItem('IconPanel-json');
+            // jsonPromise = Promise.resolve(json)
+            // if(json == null) {
                 jsonPromise = new Promise(resolve => {
                     const emojiXhr = new XMLHttpRequest();
                     emojiXhr.open('GET', options.json_url, true);
                     emojiXhr.onreadystatechange = () => {
                         if(emojiXhr.readyState == XMLHttpRequest.DONE && emojiXhr.status == 200) {
                             const json = JSON.parse(emojiXhr.responseText);
-                            localStorage.setItem('IconPanel-json',emojiXhr.responseText);
+                            //localStorage.setItem('IconPanel-json',emojiXhr.responseText);
                             resolve(json);
                         }
                     };
                     emojiXhr.send();
                 });
-            }
-            else{
-                jsonPromise = new Promise(resolve => {
-                    const json = JSON.parse(localStorage.getItem('IconPanel-json'));
-                    resolve(json);
-                })
-            }
+            // }
+            // else{
+            //     jsonPromise = new Promise(resolve => {
+            //         const json = JSON.parse(localStorage.getItem('IconPanel-json'));
+            //         resolve(json);
+            //     })
+            // }
         }
 
         return Promise.all([ svgPromise, jsonPromise ]);
     },
-    createEl: (inputElement, options) => {
+    createEl: (inputElement, options , baseUrl) => {
         if(options.panel_type == "emoji"){
 
             if(options.pack_url) {
@@ -87,10 +87,10 @@ const Emojis = {
         }
         else if(options.panel_type == "icon")
         {
-            return "<img src="+inputElement.icon_url+">";
+            return "<img src="+baseUrl+inputElement.icon_url+">";
         }
     },
-    createButton: (inputElement, options, emit) => {
+    createButton: (inputElement, options, emit , baseUrl) => {
 
         const button = document.createElement('button');
         button.setAttribute('type', 'button');
@@ -128,8 +128,8 @@ const Emojis = {
             }
         }
         else if(options.panel_type == "icon"){
-            
-            button.innerHTML = Emojis.createEl(inputElement, options);
+
+            button.innerHTML = Emojis.createEl(inputElement, options,baseUrl);
             button.classList.add('icon_pack');
             button.dataset.name = inputElement.name;
 
@@ -192,7 +192,7 @@ const Emojis = {
             let content = emojiAware.split(div.textContent);
             content.splice(offset, 0, emoji.char);
             content = content.join('');
-            
+
             div.textContent = content;
 
             // Trigger a refresh of the input

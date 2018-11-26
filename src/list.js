@@ -23,7 +23,7 @@ const list = (options, panel, json, emit) => {
         }
 
         const categoryLink = document.createElement('button');
-        
+
         categoryLink.setAttribute('title', category.name);
         if(options.panel_type == "emoji")
         {
@@ -33,7 +33,7 @@ const list = (options, panel, json, emit) => {
         else if(options.panel_type == "icon")
         {
             categoryLink.classList.add("header_icons");
-            categoryLink.innerHTML = Emojis.createEl(category.icon_pack, options);
+            categoryLink.innerHTML = Emojis.createEl(category.icon_pack, options, category.base_url);
         }
 
         categoryLink.addEventListener('click', e => {
@@ -41,7 +41,7 @@ const list = (options, panel, json, emit) => {
             const title = options.container.querySelector('#' + strippedSpace);
             scrollTo(results , title.offsetTop - results.offsetTop , 500);
         });
-        categories.appendChild(categoryLink);        
+        categories.appendChild(categoryLink);
     });
 
     // credits for this piece of code(scrollTo pure js) to adnJosh https://gist.github.com/andjosh
@@ -50,8 +50,8 @@ const list = (options, panel, json, emit) => {
             change = to - start,
             currentTime = 0,
             increment = 20;
-            
-        var animateScroll = function(){        
+
+        var animateScroll = function(){
             currentTime += increment;
             var val = Math.easeInOutQuad(currentTime, start, change, duration);
             element.scrollTop = val;
@@ -61,7 +61,7 @@ const list = (options, panel, json, emit) => {
         };
         animateScroll();
     }
-    
+
     //t = current time
     //b = start value
     //c = change in value
@@ -88,7 +88,7 @@ const list = (options, panel, json, emit) => {
             }
 
             const titles = results.querySelectorAll('.' + options.classnames.category);
-            
+
             let frequentList = localStorage.getItem('EmojiPanel-frequent');
             if(frequentList) {
                 frequentList = JSON.parse(frequentList);
@@ -123,7 +123,7 @@ const list = (options, panel, json, emit) => {
                             if(keywordMatch) {
                                 matched.push(icon.name);
                             }
-                        }); 
+                        });
                     }
                 });
                 if(matched.length == 0) {
@@ -133,7 +133,7 @@ const list = (options, panel, json, emit) => {
                 }
 
                 emit('search', { value, matched });
-                
+
                 if(options.panel_type == "emoji"){
                     [].forEach.call(emojis, emoji => {
                         if(matched.indexOf(emoji.dataset.unicode) == -1) {
@@ -220,10 +220,10 @@ const list = (options, panel, json, emit) => {
             category.emojis.forEach(function(emoji){
                 results.appendChild(Emojis.createButton(emoji, options, emit));
             })
-        }  
+        }
         else if(options.panel_type == "icon"){
             category.icons.forEach(function(icon){
-                results.appendChild(Emojis.createButton(icon, options, emit));
+                results.appendChild(Emojis.createButton(icon, options, emit, category.base_url));
             })
         }
     });

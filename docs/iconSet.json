@@ -1,234 +1,238 @@
 [
     {
       "name": "Flat Icons",
+      "base_url": "icons/contact_icon_pack/",
       "icons": [
             {
                 "name" : "24-hours",
-                "icon_url" : "icons/contact_icon_pack/24-hours.png",
+                "icon_url" : "24-hours.png",
                 "keywords" : ["24-hours"]
             },
             {
                 "name" : "agenda",
-                "icon_url" : "icons/contact_icon_pack/agenda.png",
+                "icon_url" : "agenda.png",
                 "keywords" : ["agenda"]
             },
             {
                 "name" : "arroba",
-                "icon_url" : "icons/contact_icon_pack/arroba.png",
+                "icon_url" : "arroba.png",
                 "keywords" : ["arroba"]
             },
             {
                 "name" : "assistance",
-                "icon_url" : "icons/contact_icon_pack/assistance.png",
+                "icon_url" : "assistance.png",
                 "keywords" : ["assistance"]
             },
             {
                 "name" : "calendar",
-                "icon_url" : "icons/contact_icon_pack/calendar.png",
+                "icon_url" : "calendar.png",
                 "keywords" : ["calendar"]
             },
             {
                 "name" : "chat",
-                "icon_url" : "icons/contact_icon_pack/chat.png",
+                "icon_url" : "chat.png",
                 "keywords" : ["chat"]
             },
             {
                 "name" : "contract",
-                "icon_url" : "icons/contact_icon_pack/contract.png",
+                "icon_url" : "contract.png",
                 "keywords" : ["contract"]
             },
             {
                 "name" : "customer-service",
-                "icon_url" : "icons/contact_icon_pack/customer-service.png",
+                "icon_url" : "customer-service.png",
                 "keywords" : ["customer-service"]
             },
             {
                 "name" : "email",
-                "icon_url" : "icons/contact_icon_pack/email.png",
+                "icon_url" : "email.png",
                 "keywords" : ["email"]
             },
             {
                 "name" : "placeholder",
-                "icon_url" : "icons/contact_icon_pack/placeholder.png",
+                "icon_url" : "placeholder.png",
                 "keywords" : ["placeholder"]
-            }                                                                                                           
+            }
         ],
         "icon_pack": {
-            "icon_url" : "icons/contact_icon_pack/placeholder.png"
+            "icon_url" : "placeholder.png"
         }
     },
     {
         "name": "Food Icons",
+        "base_url": "icons/food_icon_pack/",
         "icons": [
             {
                 "name" : "apple",
-                "icon_url" : "icons/food_icon_pack/apple.png",
+                "icon_url" : "apple.png",
                 "keywords" : ["apple"]
             },
             {
                 "name" : "doughnut",
-                "icon_url" : "icons/food_icon_pack/doughnut.png",
+                "icon_url" : "doughnut.png",
                 "keywords" : ["doughnut"]
             },
             {
                 "name" : "aubergine",
-                "icon_url" : "icons/food_icon_pack/aubergine.png",
+                "icon_url" : "aubergine.png",
                 "keywords" : ["aubergine"]
             },
             {
                 "name" : "avocado",
-                "icon_url" : "icons/food_icon_pack/avocado.png",
+                "icon_url" : "avocado.png",
                 "keywords" : ["avocado"]
             },
             {
                 "name" : "bacon",
-                "icon_url" : "icons/food_icon_pack/bacon.png",
+                "icon_url" : "bacon.png",
                 "keywords" : ["bacon"]
             },
             {
                 "name" : "baguette",
-                "icon_url" : "icons/food_icon_pack/baguette.png",
+                "icon_url" : "baguette.png",
                 "keywords" : ["baguette"]
             },
             {
                 "name" : "cake",
-                "icon_url" : "icons/food_icon_pack/cake.png",
+                "icon_url" : "cake.png",
                 "keywords" : ["cake"]
             },
             {
                 "name" : "cheese",
-                "icon_url" : "icons/food_icon_pack/cheese.png",
+                "icon_url" : "cheese.png",
                 "keywords" : ["cheese"]
             },
             {
                 "name" : "cookies",
-                "icon_url" : "icons/food_icon_pack/cookies.png",
+                "icon_url" : "cookies.png",
                 "keywords" : ["cookies"]
             },
             {
                 "name" : "cupcake",
-                "icon_url" : "icons/food_icon_pack/cupcake.png",
+                "icon_url" : "cupcake.png",
                 "keywords" : ["cupcake"]
             }
         ],
         "icon_pack": {
-            "icon_url" : "icons/food_icon_pack/doughnut.png"
+            "icon_url" : "doughnut.png"
         }
     },
     {
         "name": "Line Icons",
+        "base_url": "icons/line_icon_pack/",
         "icons": [
             {
                 "name" : "24-hours",
-                "icon_url" : "icons/line_icon_pack/24-hours.png",
+                "icon_url" : "24-hours.png",
                 "keywords" : ["24-hours"]
             },
             {
                 "name" : "aeroplane",
-                "icon_url" : "icons/line_icon_pack/aeroplane.png",
+                "icon_url" : "aeroplane.png",
                 "keywords" : ["aeroplane"]
             },
             {
                 "name" : "checking",
-                "icon_url" : "icons/line_icon_pack/checking.png",
+                "icon_url" : "checking.png",
                 "keywords" : ["checking"]
             },
             {
                 "name" : "delivery-truck",
-                "icon_url" : "icons/line_icon_pack/delivery-truck.png",
+                "icon_url" : "delivery-truck.png",
                 "keywords" : ["delivery-truck"]
             },
             {
                 "name" : "inspection",
-                "icon_url" : "icons/line_icon_pack/inspection.png",
+                "icon_url" : "inspection.png",
                 "keywords" : ["inspection"]
             },
             {
                 "name" : "map",
-                "icon_url" : "icons/line_icon_pack/map.png",
+                "icon_url" : "map.png",
                 "keywords" : ["map"]
             },
             {
                 "name" : "safe",
-                "icon_url" : "icons/line_icon_pack/safe.png",
+                "icon_url" : "safe.png",
                 "keywords" : ["safe"]
             },
             {
                 "name" : "scooter",
-                "icon_url" : "icons/line_icon_pack/scooter.png",
+                "icon_url" : "scooter.png",
                 "keywords" : ["scooter"]
             },
             {
                 "name" : "ship",
-                "icon_url" : "icons/line_icon_pack/ship.png",
+                "icon_url" : "ship.png",
                 "keywords" : ["ship"]
             },
             {
                 "name" : "stopwatch",
-                "icon_url" : "icons/line_icon_pack/stopwatch.png",
+                "icon_url" : "stopwatch.png",
                 "keywords" : ["stopwatch"]
-            }                                                                                                           
+            }
         ],
         "icon_pack": {
-            "icon_url" : "icons/line_icon_pack/aeroplane.png"
+            "icon_url" : "aeroplane.png"
         }
     },
     {
         "name": "Material Icons",
+        "base_url": "icons/material_icon_pack/",
         "icons": [
             {
                 "name" : "archive",
-                "icon_url" : "icons/material_icon_pack/archive.png",
+                "icon_url" : "archive.png",
                 "keywords" : ["archive"]
             },
             {
                 "name" : "calculator",
-                "icon_url" : "icons/material_icon_pack/calculator.png",
+                "icon_url" : "calculator.png",
                 "keywords" : ["calculator"]
             },
             {
                 "name" : "glue",
-                "icon_url" : "icons/material_icon_pack/glue.png",
+                "icon_url" : "glue.png",
                 "keywords" : ["glue"]
             },
             {
                 "name" : "magnifier",
-                "icon_url" : "icons/material_icon_pack/magnifier.png",
+                "icon_url" : "magnifier.png",
                 "keywords" : ["magnifier"]
             },
             {
                 "name" : "pencil",
-                "icon_url" : "icons/material_icon_pack/pencil.png",
+                "icon_url" : "pencil.png",
                 "keywords" : ["pencil"]
             },
             {
                 "name" : "brush",
-                "icon_url" : "icons/material_icon_pack/brush.png",
+                "icon_url" : "brush.png",
                 "keywords" : ["brush"]
             },
             {
                 "name" : "compass",
-                "icon_url" : "icons/material_icon_pack/compass.png",
+                "icon_url" : "compass.png",
                 "keywords" : ["compass"]
             },
             {
                 "name" : "laptop",
-                "icon_url" : "icons/material_icon_pack/laptop.png",
+                "icon_url" : "laptop.png",
                 "keywords" : ["laptop"]
             },
             {
                 "name" : "paper-clip",
-                "icon_url" : "icons/material_icon_pack/paper-clip.png",
+                "icon_url" : "paper-clip.png",
                 "keywords" : ["paper-clip"]
             },
             {
                 "name" : "push-pin",
-                "icon_url" : "icons/material_icon_pack/push-pin.png",
+                "icon_url" : "push-pin.png",
                 "keywords" : ["push-pin"]
-            }                                                                                                           
+            }
         ],
         "icon_pack": {
-            "icon_url" : "icons/material_icon_pack/calculator.png"
+            "icon_url" : "calculator.png"
         }
     }
 ]
