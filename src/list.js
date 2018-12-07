@@ -33,7 +33,7 @@ const list = (options, panel, json, emit) => {
         else if(options.panel_type == "icon")
         {
             categoryLink.classList.add("header_icons");
-            categoryLink.innerHTML = Emojis.createEl(category.icon_pack, options, category.base_url);
+            categoryLink.innerHTML = Emojis.createEl(category.icon_pack, options, category.base_url, category.media_type);
         }
 
         categoryLink.addEventListener('click', e => {
@@ -223,7 +223,7 @@ const list = (options, panel, json, emit) => {
         }
         else if(options.panel_type == "icon"){
             category.icons.forEach(function(icon){
-                results.appendChild(Emojis.createButton(icon, options, emit, category.base_url));
+                results.appendChild(Emojis.createButton(icon, options, emit, category.base_url, category.media_type));
             })
         }
     });

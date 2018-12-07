@@ -74,7 +74,7 @@ const Emojis = {
 
         return Promise.all([ svgPromise, jsonPromise ]);
     },
-    createEl: (inputElement, options , baseUrl) => {
+    createEl: (inputElement, options, baseUrl, mediaType ) => {
         if(options.panel_type == "emoji"){
 
             if(options.pack_url) {
@@ -87,10 +87,18 @@ const Emojis = {
         }
         else if(options.panel_type == "icon")
         {
-            return "<img src="+baseUrl+inputElement.icon_url+">";
+            if(mediaType == "image") {
+                return "<img src="+baseUrl+inputElement.icon_url+">";
+            }
+            else
+            {
+                return "<i class='fa "+inputElement.icon_url+"'></i>";
+            }
+
+
         }
     },
-    createButton: (inputElement, options, emit , baseUrl) => {
+    createButton: (inputElement, options, emit , baseUrl, mediaType) => {
 
         const button = document.createElement('button');
         button.setAttribute('type', 'button');
@@ -129,7 +137,7 @@ const Emojis = {
         }
         else if(options.panel_type == "icon"){
 
-            button.innerHTML = Emojis.createEl(inputElement, options,baseUrl);
+            button.innerHTML = Emojis.createEl(inputElement, options, baseUrl, mediaType);
             button.classList.add('icon_pack');
             button.dataset.name = inputElement.name;
 
