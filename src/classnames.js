@@ -4,7 +4,10 @@ module.exports = {
     panel,
     open: panel + '--open',
     trigger: panel + '--trigger',
-    
+    tab: panel+'__tab',
+    tabWrapper: panel+'__tabWrapper',
+    tabActive: panel+'__tabActive',
+
     icons: "icon_pack",
     iconpick: "icon_picker",
     emojipick: "emoji_picker",

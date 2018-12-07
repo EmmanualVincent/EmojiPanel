@@ -26,6 +26,12 @@
         visibility: visible;
         pointer-events: inherit;
     }
+    &__tab{
+        display: none;
+    }
+    &__tabActive{
+        display: block
+    }
 
     button {
         padding: 0;

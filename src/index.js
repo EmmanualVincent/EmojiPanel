@@ -17,6 +17,7 @@ const defaults = {
     json_url: '/iconSet.json',
     tether: true,
     placement: 'bottom',
+    layout_type: 'tab',
 
     locale: {
         add: 'Add emoji',

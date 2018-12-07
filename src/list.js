@@ -33,17 +33,31 @@ const list = (options, panel, json, emit) => {
         else if(options.panel_type == "icon")
         {
             categoryLink.classList.add("header_icons");
-            categoryLink.innerHTML = Emojis.createEl(category.icon_pack, options, category.base_url, category.media_type);
+            categoryLink.innerHTML = Emojis.createEl(category.icon_pack, options, category.base_url, category.media_type , category.base_class);
         }
 
         categoryLink.addEventListener('click', e => {
             let strippedSpace =  category.name.replace(/\s/g,"_");
             const title = options.container.querySelector('#' + strippedSpace);
-            scrollTo(results , title.offsetTop - results.offsetTop , 500);
+            if(options.layout_type == "tab") {
+                changeTab(strippedSpace)
+            }
+            else {
+                scrollTo(results , title.offsetTop - results.offsetTop , 500);
+            }
+
         });
         categories.appendChild(categoryLink);
     });
 
+    function changeTab(tabPostfix)
+    {
+        let tabActive = panel.querySelector('.' + options.classnames.tabActive);
+        tabActive.classList.remove(options.classnames.tabActive);
+        let targetTab = panel.querySelector('.tab__' + tabPostfix);
+        console.log('.tab__' + tabPostfix)
+        targetTab.classList.add(options.classnames.tabActive);
+    }
     // credits for this piece of code(scrollTo pure js) to adnJosh https://gist.github.com/andjosh
     function scrollTo(element, to, duration) {
         var start = element.scrollTop,
@@ -205,6 +219,11 @@ const list = (options, panel, json, emit) => {
         }
 
         // Create the category title
+        const tab = document.createElement('div');
+        tab.classList.add(options.classnames.tab);
+        let categoryClass = "tab__" + category.name.replace(/\s/g,"_");
+        tab.classList.add(categoryClass);
+
         const title = document.createElement('p');
         title.classList.add(options.classnames.category);
         let strippedSpace =  category.name.replace(/\s/g,"_");
@@ -213,17 +232,28 @@ const list = (options, panel, json, emit) => {
             .replace(/\w\S*/g, (name) => name.charAt(0).toUpperCase() + name.substr(1).toLowerCase())
             .replace('And', '&amp;');
         title.innerHTML = categoryName;
-        results.appendChild(title);
+        tab.appendChild(title);
+        results.appendChild(tab);
+
+        if(options.layout_type == "tab") {
+            if(i == 0)
+            {
+                tab.classList.add(options.classnames.tabActive);
+            }
+        }
+        else {
+            tab.classList.add(options.classnames.tabActive);
+        }
 
         // Create the emoji buttons
         if(options.panel_type == "emoji"){
             category.emojis.forEach(function(emoji){
-                results.appendChild(Emojis.createButton(emoji, options, emit));
+                tab.appendChild(Emojis.createButton(emoji, options, emit));
             })
         }
         else if(options.panel_type == "icon"){
             category.icons.forEach(function(icon){
-                results.appendChild(Emojis.createButton(icon, options, emit, category.base_url, category.media_type));
+                tab.appendChild(Emojis.createButton(icon, options, emit, category.base_url, category.media_type, category.base_class));
             })
         }
     });
