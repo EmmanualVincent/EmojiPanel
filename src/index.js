@@ -10,10 +10,9 @@ const defaults = {
     frequent: true,
     fitzpatrick: 'a',
     hidden_categories: [],
-
     pack_url: null,
-    json_url: '/emojis.json',
-
+    panel_type: 'icon',
+    json_url: '/iconSet.json',
     tether: true,
     placement: 'bottom',
 

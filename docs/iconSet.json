@@ -1,0 +1,234 @@
+[
+    {
+      "name": "Flat Icons",
+      "icons": [
+            {
+                "name" : "24-hours",
+                "icon_url" : "icons/contact_icon_pack/24-hours.png",
+                "keywords" : ["24-hours"]
+            },
+            {
+                "name" : "agenda",
+                "icon_url" : "icons/contact_icon_pack/agenda.png",
+                "keywords" : ["agenda"]
+            },
+            {
+                "name" : "arroba",
+                "icon_url" : "icons/contact_icon_pack/arroba.png",
+                "keywords" : ["arroba"]
+            },
+            {
+                "name" : "assistance",
+                "icon_url" : "icons/contact_icon_pack/assistance.png",
+                "keywords" : ["assistance"]
+            },
+            {
+                "name" : "calendar",
+                "icon_url" : "icons/contact_icon_pack/calendar.png",
+                "keywords" : ["calendar"]
+            },
+            {
+                "name" : "chat",
+                "icon_url" : "icons/contact_icon_pack/chat.png",
+                "keywords" : ["chat"]
+            },
+            {
+                "name" : "contract",
+                "icon_url" : "icons/contact_icon_pack/contract.png",
+                "keywords" : ["contract"]
+            },
+            {
+                "name" : "customer-service",
+                "icon_url" : "icons/contact_icon_pack/customer-service.png",
+                "keywords" : ["customer-service"]
+            },
+            {
+                "name" : "email",
+                "icon_url" : "icons/contact_icon_pack/email.png",
+                "keywords" : ["email"]
+            },
+            {
+                "name" : "placeholder",
+                "icon_url" : "icons/contact_icon_pack/placeholder.png",
+                "keywords" : ["placeholder"]
+            }                                                                                                           
+        ],
+        "icon_pack": {
+            "icon_url" : "icons/contact_icon_pack/placeholder.png"
+        }
+    },
+    {
+        "name": "Food Icons",
+        "icons": [
+            {
+                "name" : "apple",
+                "icon_url" : "icons/food_icon_pack/apple.png",
+                "keywords" : ["apple"]
+            },
+            {
+                "name" : "doughnut",
+                "icon_url" : "icons/food_icon_pack/doughnut.png",
+                "keywords" : ["doughnut"]
+            },
+            {
+                "name" : "aubergine",
+                "icon_url" : "icons/food_icon_pack/aubergine.png",
+                "keywords" : ["aubergine"]
+            },
+            {
+                "name" : "avocado",
+                "icon_url" : "icons/food_icon_pack/avocado.png",
+                "keywords" : ["avocado"]
+            },
+            {
+                "name" : "bacon",
+                "icon_url" : "icons/food_icon_pack/bacon.png",
+                "keywords" : ["bacon"]
+            },
+            {
+                "name" : "baguette",
+                "icon_url" : "icons/food_icon_pack/baguette.png",
+                "keywords" : ["baguette"]
+            },
+            {
+                "name" : "cake",
+                "icon_url" : "icons/food_icon_pack/cake.png",
+                "keywords" : ["cake"]
+            },
+            {
+                "name" : "cheese",
+                "icon_url" : "icons/food_icon_pack/cheese.png",
+                "keywords" : ["cheese"]
+            },
+            {
+                "name" : "cookies",
+                "icon_url" : "icons/food_icon_pack/cookies.png",
+                "keywords" : ["cookies"]
+            },
+            {
+                "name" : "cupcake",
+                "icon_url" : "icons/food_icon_pack/cupcake.png",
+                "keywords" : ["cupcake"]
+            }
+        ],
+        "icon_pack": {
+            "icon_url" : "icons/food_icon_pack/doughnut.png"
+        }
+    },
+    {
+        "name": "Line Icons",
+        "icons": [
+            {
+                "name" : "24-hours",
+                "icon_url" : "icons/line_icon_pack/24-hours.png",
+                "keywords" : ["24-hours"]
+            },
+            {
+                "name" : "aeroplane",
+                "icon_url" : "icons/line_icon_pack/aeroplane.png",
+                "keywords" : ["aeroplane"]
+            },
+            {
+                "name" : "checking",
+                "icon_url" : "icons/line_icon_pack/checking.png",
+                "keywords" : ["checking"]
+            },
+            {
+                "name" : "delivery-truck",
+                "icon_url" : "icons/line_icon_pack/delivery-truck.png",
+                "keywords" : ["delivery-truck"]
+            },
+            {
+                "name" : "inspection",
+                "icon_url" : "icons/line_icon_pack/inspection.png",
+                "keywords" : ["inspection"]
+            },
+            {
+                "name" : "map",
+                "icon_url" : "icons/line_icon_pack/map.png",
+                "keywords" : ["map"]
+            },
+            {
+                "name" : "safe",
+                "icon_url" : "icons/line_icon_pack/safe.png",
+                "keywords" : ["safe"]
+            },
+            {
+                "name" : "scooter",
+                "icon_url" : "icons/line_icon_pack/scooter.png",
+                "keywords" : ["scooter"]
+            },
+            {
+                "name" : "ship",
+                "icon_url" : "icons/line_icon_pack/ship.png",
+                "keywords" : ["ship"]
+            },
+            {
+                "name" : "stopwatch",
+                "icon_url" : "icons/line_icon_pack/stopwatch.png",
+                "keywords" : ["stopwatch"]
+            }                                                                                                           
+        ],
+        "icon_pack": {
+            "icon_url" : "icons/line_icon_pack/aeroplane.png"
+        }
+    },
+    {
+        "name": "Material Icons",
+        "icons": [
+            {
+                "name" : "archive",
+                "icon_url" : "icons/material_icon_pack/archive.png",
+                "keywords" : ["archive"]
+            },
+            {
+                "name" : "calculator",
+                "icon_url" : "icons/material_icon_pack/calculator.png",
+                "keywords" : ["calculator"]
+            },
+            {
+                "name" : "glue",
+                "icon_url" : "icons/material_icon_pack/glue.png",
+                "keywords" : ["glue"]
+            },
+            {
+                "name" : "magnifier",
+                "icon_url" : "icons/material_icon_pack/magnifier.png",
+                "keywords" : ["magnifier"]
+            },
+            {
+                "name" : "pencil",
+                "icon_url" : "icons/material_icon_pack/pencil.png",
+                "keywords" : ["pencil"]
+            },
+            {
+                "name" : "brush",
+                "icon_url" : "icons/material_icon_pack/brush.png",
+                "keywords" : ["brush"]
+            },
+            {
+                "name" : "compass",
+                "icon_url" : "icons/material_icon_pack/compass.png",
+                "keywords" : ["compass"]
+            },
+            {
+                "name" : "laptop",
+                "icon_url" : "icons/material_icon_pack/laptop.png",
+                "keywords" : ["laptop"]
+            },
+            {
+                "name" : "paper-clip",
+                "icon_url" : "icons/material_icon_pack/paper-clip.png",
+                "keywords" : ["paper-clip"]
+            },
+            {
+                "name" : "push-pin",
+                "icon_url" : "icons/material_icon_pack/push-pin.png",
+                "keywords" : ["push-pin"]
+            }                                                                                                           
+        ],
+        "icon_pack": {
+            "icon_url" : "icons/material_icon_pack/calculator.png"
+        }
+    }
+]

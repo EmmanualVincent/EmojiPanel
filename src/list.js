@@ -23,22 +23,72 @@ const list = (options, panel, json, emit) => {
         }
 
         const categoryLink = document.createElement('button');
-        categoryLink.classList.add(options.classnames.emoji);
+        
         categoryLink.setAttribute('title', category.name);
-        categoryLink.innerHTML = Emojis.createEl(category.icon, options);
+        if(options.panel_type == "emoji")
+        {
+            categoryLink.classList.add(options.classnames.emoji);
+            categoryLink.innerHTML = Emojis.createEl(category.icon, options);
+        }
+        else if(options.panel_type == "icon")
+        {
+            categoryLink.classList.add("header_icons");
+            categoryLink.innerHTML = Emojis.createEl(category.icon_pack, options);
+        }
+
         categoryLink.addEventListener('click', e => {
-            const title = options.container.querySelector('#' + category.name);
-            results.scrollTop = title.offsetTop - results.offsetTop;
+            let strippedSpace =  category.name.replace(/\s/g,"_");
+            const title = options.container.querySelector('#' + strippedSpace);
+            scrollTo(results , title.offsetTop - results.offsetTop , 500);
         });
         categories.appendChild(categoryLink);        
     });
 
+    // credits for this piece of code(scrollTo pure js) to adnJosh https://gist.github.com/andjosh
+    function scrollTo(element, to, duration) {
+        var start = element.scrollTop,
+            change = to - start,
+            currentTime = 0,
+            increment = 20;
+            
+        var animateScroll = function(){        
+            currentTime += increment;
+            var val = Math.easeInOutQuad(currentTime, start, change, duration);
+            element.scrollTop = val;
+            if(currentTime < duration) {
+                setTimeout(animateScroll, increment);
+            }
+        };
+        animateScroll();
+    }
+    
+    //t = current time
+    //b = start value
+    //c = change in value
+    //d = duration
+    Math.easeInOutQuad = function (t, b, c, d) {
+      t /= d/2;
+        if (t < 1) return c/2*t*t + b;
+        t--;
+        return -c/2 * (t*(t-2) - 1) + b;
+    };
+
     // Handle the search input
     if(options.search == true) {
-        searchInput.addEventListener('input', e => {
-            const emojis = results.querySelectorAll('.' + options.classnames.emoji);
-            const titles = results.querySelectorAll('.' + options.classnames.category);
 
+        searchInput.addEventListener('input', e => {
+            let emojis ,  icons ;
+            if(options.panel_type == "emoji")
+            {
+                emojis = results.querySelectorAll('.' + options.classnames.emoji);
+            }
+            else if(options.panel_type == "icon")
+            {
+                icons = results.querySelectorAll('.' + options.classnames.icons);
+            }
+
+            const titles = results.querySelectorAll('.' + options.classnames.category);
+            
             let frequentList = localStorage.getItem('EmojiPanel-frequent');
             if(frequentList) {
                 frequentList = JSON.parse(frequentList);
@@ -51,15 +101,30 @@ const list = (options, panel, json, emit) => {
                 const matched = [];
                 Object.keys(json).forEach(i => {
                     const category = json[i];
-                    category.emojis.forEach(emoji => {
-                        const keywordMatch = emoji.keywords.find(keyword => {
-                            keyword = keyword.replace(/-/g, '').toLowerCase();
-                            return keyword.indexOf(value) > -1;
+                    if(options.panel_type == "emoji")
+                    {
+                        category.emojis.forEach(emoji => {
+                            const keywordMatch = emoji.keywords.find(keyword => {
+                                keyword = keyword.replace(/-/g, '').toLowerCase();
+                                return keyword.indexOf(value) > -1;
+                            });
+                            if(keywordMatch) {
+                                matched.push(emoji.unicode);
+                            }
                         });
-                        if(keywordMatch) {
-                            matched.push(emoji.unicode);
-                        }
-                    });
+                    }
+                    else if(options.panel_type == "icon")
+                    {
+                        category.icons.forEach(icon => {
+                            const keywordMatch = icon.keywords.find(keyword => {
+                                keyword = keyword.replace(/-/g, '').toLowerCase();
+                                return keyword.indexOf(value) > -1;
+                            });
+                            if(keywordMatch) {
+                                matched.push(icon.name);
+                            }
+                        }); 
+                    }
                 });
                 if(matched.length == 0) {
                     emptyState.style.display = 'block';
@@ -68,14 +133,26 @@ const list = (options, panel, json, emit) => {
                 }
 
                 emit('search', { value, matched });
+                
+                if(options.panel_type == "emoji"){
+                    [].forEach.call(emojis, emoji => {
+                        if(matched.indexOf(emoji.dataset.unicode) == -1) {
+                            emoji.style.display = 'none';
+                        } else {
+                            emoji.style.display = 'inline-block';
+                        }
+                    });
+                }
+                else if(options.panel_type == "icon"){
+                    [].forEach.call(icons, icon => {
+                        if(matched.indexOf(icon.dataset.name) == -1) {
+                            icon.style.display = 'none';
+                        } else {
+                            icon.style.display = 'inline-block';
+                        }
+                    });
+                }
 
-                [].forEach.call(emojis, emoji => {
-                    if(matched.indexOf(emoji.dataset.unicode) == -1) {
-                        emoji.style.display = 'none';
-                    } else {
-                        emoji.style.display = 'inline-block';
-                    }
-                });
                 [].forEach.call(titles, title => {
                     title.style.display = 'none';
                 });
@@ -85,9 +162,19 @@ const list = (options, panel, json, emit) => {
                     frequentTitle.style.display = 'none';
                 }
             } else {
-                [].forEach.call(emojis, emoji => {
-                    emoji.style.display = 'inline-block';
-                });
+                let emojis = results.querySelectorAll('.' + options.classnames.emoji);
+                let icons = results.querySelectorAll('.' + options.classnames.icons);
+
+                if(options.panel_type == "emoji"){
+                    [].forEach.call(emojis, emoji => {
+                        emoji.style.display = 'inline-block';
+                    });
+                }
+                else if(options.panel_type == "icon"){
+                    [].forEach.call(icons, icon => {
+                        icon.style.display = 'inline-block';
+                    });
+                }
                 [].forEach.call(titles, title => {
                     title.style.display = 'block';
                 });
@@ -120,7 +207,8 @@ const list = (options, panel, json, emit) => {
         // Create the category title
         const title = document.createElement('p');
         title.classList.add(options.classnames.category);
-        title.id = category.name;
+        let strippedSpace =  category.name.replace(/\s/g,"_");
+        title.id = strippedSpace;
         let categoryName = category.name.replace(/_/g, ' ')
             .replace(/\w\S*/g, (name) => name.charAt(0).toUpperCase() + name.substr(1).toLowerCase())
             .replace('And', '&amp;');
@@ -128,10 +216,19 @@ const list = (options, panel, json, emit) => {
         results.appendChild(title);
 
         // Create the emoji buttons
-        category.emojis.forEach(emoji => results.appendChild(Emojis.createButton(emoji, options, emit)));
+        if(options.panel_type == "emoji"){
+            category.emojis.forEach(function(emoji){
+                results.appendChild(Emojis.createButton(emoji, options, emit));
+            })
+        }  
+        else if(options.panel_type == "icon"){
+            category.icons.forEach(function(icon){
+                results.appendChild(Emojis.createButton(icon, options, emit));
+            })
+        }
     });
 
-    if(options.fitzpatrick) {
+    if((options.fitzpatrick)&&(options.panel_type == "emoji")){
         // Create the fitzpatrick modifier button
         const hand = { // ✋
             unicode: '270b' + modifiers[options.fitzpatrick].unicode,
